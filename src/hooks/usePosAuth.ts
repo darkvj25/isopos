@@ -66,6 +66,8 @@ export const usePosAuth = () => {
   const logout = () => {
     setCurrentUser(null);
     localStorage.removeItem('pos_current_user');
+    // Force navigation to home/login
+    window.location.href = '/';
   };
 
   const addUser = (userData: Omit<User, 'id' | 'createdAt'>): User => {
