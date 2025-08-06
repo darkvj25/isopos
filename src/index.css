@@ -2,41 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* POS System Design Tokens - Philippines Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* POS Color Palette */
+    --background: 215 25% 97%;
+    --foreground: 220 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Professional Blue */
+    --primary: 220 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 220 85% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Warm Gray */
+    --secondary: 215 15% 92%;
+    --secondary-foreground: 220 15% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 15% 94%;
+    --muted-foreground: 220 10% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 60% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive - Error Red */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Success - Philippine Green */
+    --success: 145 65% 40%;
+    --success-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    /* Warning - Amber */
+    --warning: 40 95% 55%;
+    --warning-foreground: 40 15% 15%;
+
+    --border: 215 20% 85%;
+    --input: 0 0% 100%;
+    --ring: 220 85% 55%;
+
+    --radius: 0.75rem;
+
+    /* POS Specific Colors */
+    --pos-sidebar: 220 25% 20%;
+    --pos-sidebar-foreground: 220 15% 85%;
+    --pos-sidebar-active: 220 85% 55%;
+    --pos-header: 0 0% 100%;
+    --pos-total: 145 65% 40%;
+    --pos-cash: 40 95% 55%;
+    --pos-digital: 260 85% 55%;
+
+    /* Philippines Peso Theme */
+    --peso-primary: 220 85% 55%;
+    --peso-secondary: 40 95% 55%;
+    --peso-success: 145 65% 40%;
+
+    /* Shadows */
+    --shadow-pos: 0 4px 12px -2px hsl(220 25% 20% / 0.15);
+    --shadow-card: 0 2px 8px -2px hsl(220 25% 20% / 0.1);
+
+    /* Typography */
+    --font-pos-display: 'Inter', system-ui, sans-serif;
+    --font-pos-mono: 'JetBrains Mono', 'Courier New', monospace;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +133,55 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-[var(--font-pos-display)];
+  }
+
+  /* POS Utility Classes */
+  .pos-shadow {
+    box-shadow: var(--shadow-pos);
+  }
+
+  .pos-card-shadow {
+    box-shadow: var(--shadow-card);
+  }
+
+  .peso-format::before {
+    content: '₱';
+  }
+
+  .pos-button-primary {
+    @apply bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--primary-dark))] transition-colors;
+  }
+
+  .pos-button-success {
+    @apply bg-[hsl(var(--success))] text-[hsl(var(--success-foreground))] hover:bg-[hsl(var(--success))]/90 transition-colors;
+  }
+
+  .pos-button-warning {
+    @apply bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))] hover:bg-[hsl(var(--warning))]/90 transition-colors;
+  }
+
+  .pos-button-destructive {
+    @apply bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))] hover:bg-[hsl(var(--destructive))]/90 transition-colors;
+  }
+
+  .pos-sidebar {
+    @apply bg-[hsl(var(--pos-sidebar))] text-[hsl(var(--pos-sidebar-foreground))];
+  }
+
+  .pos-sidebar-active {
+    @apply bg-[hsl(var(--pos-sidebar-active))] text-white;
+  }
+
+  .pos-total {
+    @apply text-[hsl(var(--pos-total))] font-bold;
+  }
+
+  .low-stock {
+    @apply bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))];
+  }
+
+  .out-of-stock {
+    @apply bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))];
   }
 }

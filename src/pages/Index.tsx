@@ -1,13 +1,24 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthGuard } from '@/components/pos/AuthGuard';
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Redirect authenticated users to dashboard
+    const currentUser = localStorage.getItem('pos_current_user');
+    if (currentUser) {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <AuthGuard>
+      <div className="min-h-screen">
+        {/* This will redirect to login if not authenticated, or show loading */}
       </div>
-    </div>
+    </AuthGuard>
   );
 };
 
