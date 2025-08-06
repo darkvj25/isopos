@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePosAuth } from '@/hooks/usePosAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +9,7 @@ import { AlertCircle, Store, User, Lock } from 'lucide-react';
 
 export const LoginPage = () => {
   const { login } = usePosAuth();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -27,7 +29,8 @@ export const LoginPage = () => {
       setError(result.error || 'Login failed');
       console.log('Login failed:', result.error);
     } else {
-      console.log('Login successful, should redirect');
+      console.log('Login successful, redirecting to dashboard');
+      navigate('/dashboard');
     }
     
     setIsLoading(false);
