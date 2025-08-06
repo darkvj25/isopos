@@ -43,15 +43,23 @@ export const usePosAuth = () => {
   }, []);
 
   const login = (username: string, password: string): { success: boolean; error?: string; user?: User } => {
+    console.log('usePosAuth login called with:', { username, password });
+    console.log('Available users:', users);
+    
     const user = users.find(u => u.username === username && u.password === password && u.isActive);
     
+    console.log('Found user:', user);
+    
     if (!user) {
+      console.log('Login failed: Invalid credentials');
       return { success: false, error: 'Invalid username or password' };
     }
 
+    console.log('Setting current user:', user);
     setCurrentUser(user);
     saveToLocalStorage('pos_current_user', user);
     
+    console.log('Login successful');
     return { success: true, user };
   };
 

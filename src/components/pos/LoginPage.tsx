@@ -18,10 +18,16 @@ export const LoginPage = () => {
     setError('');
     setIsLoading(true);
 
+    console.log('Login attempt:', { username, password });
+    
     const result = login(username, password);
+    console.log('Login result:', result);
     
     if (!result.success) {
       setError(result.error || 'Login failed');
+      console.log('Login failed:', result.error);
+    } else {
+      console.log('Login successful, should redirect');
     }
     
     setIsLoading(false);
